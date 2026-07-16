@@ -11,6 +11,9 @@ def retrieve_policy_context(
     """
     Retrieve relevant payer-policy chunks and normalize the ChromaDB response
     into a citation-friendly structure.
+
+    Additional results are requested from ChromaDB so duplicate chunks can be
+    removed without reducing the amount of useful context returned.
     """
 
     if not query.strip():
@@ -19,10 +22,12 @@ def retrieve_policy_context(
     if n_results <= 0:
         raise ValueError("n_results must be greater than 0")
 
+    expanded_result_count = max(n_results * 4, n_results)
+
     results = search_policy_chunks(
         query=query,
         payer=payer,
-        n_results=n_results,
+        n_results=expanded_result_count,
     )
 
     documents = results.get("documents", [[]])[0]
@@ -30,12 +35,27 @@ def retrieve_policy_context(
     distances = results.get("distances", [[]])[0]
 
     retrieved_chunks: list[dict[str, Any]] = []
+    seen_chunks: set[tuple[str, str, str, int, int, str]] = set()
 
     for document, metadata, distance in zip(
         documents,
         metadatas,
         distances,
     ):
+        duplicate_key = (
+            str(metadata["payer"]),
+            str(metadata["policy_title"]),
+            str(metadata["source_file"]),
+            int(metadata["page_number"]),
+            int(metadata["chunk_index"]),
+            str(document),
+        )
+
+        if duplicate_key in seen_chunks:
+            continue
+
+        seen_chunks.add(duplicate_key)
+
         retrieved_chunks.append(
             {
                 "text": document,
@@ -50,5 +70,8 @@ def retrieve_policy_context(
                 },
             }
         )
+
+        if len(retrieved_chunks) == n_results:
+            break
 
     return retrieved_chunks

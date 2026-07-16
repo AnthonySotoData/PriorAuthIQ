@@ -1,10 +1,11 @@
 from openai import OpenAI
 
 from src.config import settings
+from src.llm.provider import LLMProvider
 from src.models.ai_response import PriorAuthDecision
 
 
-class OpenAIProvider:
+class OpenAIProvider(LLMProvider):
     """
     OpenAI implementation of the PriorAuthIQ language-model provider.
     """

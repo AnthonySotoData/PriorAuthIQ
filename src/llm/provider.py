@@ -1,5 +1,7 @@
 from typing import Protocol
 
+from src.models.ai_response import PriorAuthDecision
+
 
 class LLMProvider(Protocol):
     """
@@ -10,8 +12,8 @@ class LLMProvider(Protocol):
     and business-logic layers.
     """
 
-    def generate(self, prompt: str) -> str:
+    def generate(self, prompt: str) -> PriorAuthDecision:
         """
-        Generate a text response from the supplied prompt.
+        Generate and validate a structured prior-authorization decision.
         """
         ...

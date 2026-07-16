@@ -87,6 +87,42 @@ def index_policy_chunks(
     return len(ids)
 
 
+def delete_policy_document(
+    payer: str,
+    policy_title: str,
+    source_file: str,
+) -> int:
+    """
+    Delete previously indexed chunks for the same payer, policy title,
+    and source filename.
+
+    This prevents repeated uploads of the same policy from creating duplicate
+    retrieval results.
+    """
+
+    collection = get_policy_collection()
+
+    existing = collection.get(
+        where={
+            "$and": [
+                {"payer": payer},
+                {"policy_title": policy_title},
+                {"source_file": source_file},
+            ]
+        },
+        include=[],
+    )
+
+    existing_ids = existing.get("ids", [])
+
+    if not existing_ids:
+        return 0
+
+    collection.delete(ids=existing_ids)
+
+    return len(existing_ids)
+
+
 def search_policy_chunks(
     query: str,
     n_results: int = 3,

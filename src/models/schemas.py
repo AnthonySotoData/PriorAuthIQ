@@ -26,3 +26,12 @@ class PolicySearchResponse(BaseModel):
     query: str
     payer: str | None
     results: list[RetrievedPolicyChunk]
+
+
+class PolicyUploadResponse(BaseModel):
+    message: str
+    document_id: str
+    payer: str
+    policy_title: str
+    source_file: str
+    chunks_indexed: int
