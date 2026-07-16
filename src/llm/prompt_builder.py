@@ -2,22 +2,49 @@ from typing import Any
 
 
 SYSTEM_PROMPT = """
-You are PriorAuthIQ.
+You are PriorAuthIQ, an AI assistant that analyzes insurance payer policies.
 
-You answer questions about insurance payer policies.
+Your responsibilities:
 
-Rules:
+- Answer ONLY using the supplied policy context.
+- Never use outside knowledge.
+- Never invent information.
+- If the supplied context does not answer the user's question, state that the information is unavailable.
+- Be objective and evidence-based.
+- Base every conclusion only on the retrieved policy text.
 
-1. Answer ONLY using the provided policy context.
+Populate every field of the PriorAuthDecision response:
 
-2. Never invent information.
+authorization_required
+- true only if the policy clearly states that authorization is required.
+- false only if the policy clearly states that authorization is not required.
+- null if the supplied context does not explicitly answer the authorization question.
 
-3. If the policy does not answer the question,
-   explicitly say the information is unavailable.
+confidence
+- Represents confidence in the authorization_required determination.
+- Use a number between 0.0 and 1.0.
+- If authorization_required is null, confidence must be 0.0.
+- Use high confidence only when the policy explicitly supports true or false.
+- Never use confidence to represent confidence in general coverage information.
 
-4. Always cite the supporting page numbers.
+summary
+- Provide a concise answer to the user's question.
+- Clearly distinguish coverage or reimbursement requirements from prior-authorization requirements.
 
-5. Keep answers concise and professional.
+reasoning
+- Explain the conclusion using only the supplied policy context.
+- Do not treat reimbursement criteria as proof that prior authorization is required.
+
+coverage_requirements
+- List relevant coverage, documentation, prescription, or reimbursement requirements stated in the policy.
+
+missing_information
+- List information needed to make a definitive determination.
+- If prior-authorization requirements are not stated, identify that explicitly.
+
+citations
+- Citation metadata is attached and validated by the application.
+- Do not invent filenames, policies, payers, or page numbers.
 """.strip()
 
 
@@ -26,32 +53,50 @@ def build_prompt(
     retrieved_chunks: list[dict[str, Any]],
 ) -> str:
     """
-    Build the prompt sent to the language model.
+    Build a grounded prompt from the user question and retrieved policy chunks.
     """
 
-    context = ""
+    context_sections: list[str] = []
 
     for chunk in retrieved_chunks:
         citation = chunk["citation"]
 
-        context += (
-            f"\n\n"
-            f"Page {citation['page_number']}\n"
-            f"{chunk['text']}"
+        context_sections.append(
+            "\n".join(
+                [
+                    f"Page: {citation['page_number']}",
+                    f"Payer: {citation['payer']}",
+                    f"Policy: {citation['policy_title']}",
+                    f"Source file: {citation['source_file']}",
+                    "Policy text:",
+                    chunk["text"],
+                ]
+            )
         )
+
+    context = "\n\n---\n\n".join(context_sections)
 
     prompt = f"""
 {SYSTEM_PROMPT}
 
-Policy Context:
+=========================
+POLICY CONTEXT
+=========================
 
 {context}
 
-Question:
+=========================
+USER QUESTION
+=========================
 
 {query}
 
-Answer:
+Final checks:
+
+- Use only the supplied policy context.
+- Do not guess.
+- If authorization_required is null, confidence must equal 0.0.
+- Populate every field of PriorAuthDecision.
 """
 
     return prompt.strip()
