@@ -1,11 +1,8 @@
 from fastapi import APIRouter, HTTPException
 
-from src.models.schemas import (
-    PolicySearchRequest,
-    PolicySearchResponse,
-    RetrievedPolicyChunk,
-)
-from src.rag.retriever import retrieve_policy_context
+from src.models.ai_response import PriorAuthDecision
+from src.models.schemas import PolicySearchRequest
+from src.services.prior_auth_service import PriorAuthService
 
 
 router = APIRouter(
@@ -13,36 +10,29 @@ router = APIRouter(
     tags=["Policy Search"],
 )
 
+service = PriorAuthService()
+
 
 @router.post(
     "/search",
-    response_model=PolicySearchResponse,
+    response_model=PriorAuthDecision,
 )
 def search_policies(
     request: PolicySearchRequest,
-) -> PolicySearchResponse:
+) -> PriorAuthDecision:
     """
-    Search indexed payer policies and return semantically relevant,
-    citation-ready text chunks.
+    Search payer policies and return an AI-generated,
+    citation-backed authorization decision.
     """
 
     try:
-        results = retrieve_policy_context(
+        return service.answer_question(
             query=request.query,
             payer=request.payer,
-            n_results=request.n_results,
         )
+
     except ValueError as exc:
         raise HTTPException(
             status_code=400,
             detail=str(exc),
         ) from exc
-
-    return PolicySearchResponse(
-        query=request.query,
-        payer=request.payer,
-        results=[
-            RetrievedPolicyChunk(**result)
-            for result in results
-        ],
-    )
