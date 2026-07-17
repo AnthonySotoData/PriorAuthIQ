@@ -2,11 +2,9 @@
 
 <div align="center">
 
-### Enterprise AI-Powered Prior Authorization Intelligence Platform
+## Enterprise AI-Powered Prior Authorization Intelligence
 
-Transform payer policy documents into structured, citation-backed prior authorization intelligence using **Retrieval-Augmented Generation (RAG)**, semantic search, vector embeddings, and Large Language Models.
-
----
+**Transform payer policy documents into structured, citation-backed prior authorization intelligence using Retrieval-Augmented Generation (RAG), semantic search, vector embeddings, and Large Language Models.**
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi)
@@ -20,43 +18,50 @@ Transform payer policy documents into structured, citation-backed prior authoriz
 
 ---
 
-# Overview
+## Overview
 
-PriorAuthIQ is an AI-powered healthcare intelligence platform designed to assist revenue cycle teams with interpreting payer policies related to prior authorization, reimbursement, and coverage requirements.
+PriorAuthIQ is an AI-powered healthcare intelligence platform that helps interpret insurance payer policies related to prior authorization, reimbursement, and coverage requirements.
 
-Rather than relying solely on a large language model, PriorAuthIQ implements a Retrieval-Augmented Generation (RAG) architecture that retrieves relevant policy content from a vector database before generating a structured response. This approach improves factual accuracy, reduces hallucinations, and grounds every answer in the underlying policy document.
+Instead of relying solely on a language model, PriorAuthIQ implements a **Retrieval-Augmented Generation (RAG)** architecture. Relevant policy content is retrieved from a vector database before an LLM generates a structured response, improving factual accuracy and grounding every answer in source documentation.
 
-The platform automatically ingests payer policy PDFs, extracts and chunks text, generates semantic embeddings, stores them in ChromaDB, and uses OpenAI GPT-4.1-mini to generate citation-backed responses through a FastAPI REST API.
+The application automatically:
+
+- Uploads payer policy PDFs
+- Extracts and chunks policy text
+- Generates semantic embeddings
+- Stores documents in ChromaDB
+- Retrieves relevant policy context
+- Produces structured, citation-backed AI responses through a FastAPI REST API
 
 ---
 
-# Why PriorAuthIQ?
+## Why This Project?
 
-Healthcare organizations spend thousands of hours each year manually reviewing payer policies to answer questions such as:
+Revenue cycle teams spend significant time manually reviewing payer policies to answer questions such as:
 
 - Is prior authorization required?
 - What documentation is required?
-- What are the reimbursement requirements?
-- What coverage limitations exist?
+- What services are covered?
+- What reimbursement rules apply?
 
-PriorAuthIQ demonstrates how modern AI techniques—including semantic search, vector databases, and Retrieval-Augmented Generation—can accelerate policy review while maintaining transparency through citation-backed responses.
-
----
-
-# Key Features
-
-- AI-powered payer policy interpretation
-- Retrieval-Augmented Generation (RAG)
-- Semantic search using Sentence Transformers
-- ChromaDB vector database
-- OpenAI GPT-4.1-mini integration
-- PDF upload and automatic policy ingestion
-- Structured Pydantic responses
-- Citation-backed answers
-- Duplicate document replacement
-- FastAPI REST API
-- Interactive Swagger documentation
+PriorAuthIQ demonstrates how modern AI engineering techniques—including semantic search, vector databases, and Retrieval-Augmented Generation—can streamline this workflow while keeping responses grounded in the original policy documents.
 
 ---
 
-> **Current Status:** Active development — MVP nearly complete.
+## Current Features
+
+- ✅ Retrieval-Augmented Generation (RAG)
+- ✅ OpenAI GPT-4.1-mini integration
+- ✅ Semantic search with Sentence Transformers
+- ✅ ChromaDB vector database
+- ✅ PDF upload and automatic policy ingestion
+- ✅ Citation-backed responses
+- ✅ Structured Pydantic outputs
+- ✅ Duplicate document replacement
+- ✅ FastAPI REST API
+- ✅ Interactive Swagger documentation
+- ✅ Automated testing with Pytest *(in progress)*
+
+---
+
+> **Status:** Active development — MVP nearing completion.
