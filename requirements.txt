@@ -3,3 +3,4 @@ pydantic-settings
 pymupdf
 chromadb
 sentence-transformers
+openai

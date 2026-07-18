@@ -64,4 +64,17 @@ PriorAuthIQ demonstrates how modern AI engineering techniques—including semant
 
 ---
 
+## System Architecture
+
+PriorAuthIQ follows a modular Retrieval-Augmented Generation (RAG) architecture that ingests payer policy documents, indexes them into a vector database, retrieves relevant policy context, and generates structured, citation-backed responses using a large language model.
+
+<p align="center">
+  <img
+    src="images/priorauthiq-architecture.svg"
+    alt="PriorAuthIQ Enterprise RAG Architecture"
+    width="1000">
+</p>
+
+The diagram below illustrates the complete document ingestion, retrieval, and AI inference pipeline used to produce grounded responses from uploaded payer policy documentation.
+
 > **Status:** Active development — MVP nearing completion.
