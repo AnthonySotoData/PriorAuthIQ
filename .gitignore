@@ -9,6 +9,9 @@ __pycache__/
 # Environment variables
 .env
 
+# Testing
+.pytest_cache/
+
 # IDE
 .vscode/
 
