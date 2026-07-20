@@ -22,7 +22,9 @@
 
 ## Overview
 
-PriorAuthIQ is an AI-powered healthcare intelligence platform that helps interpret insurance payer policies related to prior authorization, reimbursement, and coverage requirements.
+PriorAuthIQ is an AI-powered Retrieval-Augmented Generation (RAG) application that answers payer policy and prior authorization questions using official healthcare policy documents, semantic search, vector embeddings, and citation-backed responses.
+
+Rather than relying solely on a language model's pretrained knowledge, PriorAuthIQ retrieves relevant policy content from a vector database before generating structured responses with OpenAI GPT-4.1-mini. This retrieval-first architecture improves factual accuracy, minimizes hallucinations, and allows every response to reference its original source documentation.
 
 Instead of relying solely on a language model, PriorAuthIQ implements a **Retrieval-Augmented Generation (RAG)** architecture. Relevant policy content is retrieved from a vector database before OpenAI GPT-4.1-mini generates a structured response, improving factual accuracy and grounding every answer in source documentation.
 
@@ -37,16 +39,13 @@ The application automatically:
 
 ---
 
-## Why This Project?
+## Why I Built PriorAuthIQ
 
-Revenue cycle teams spend significant time manually reviewing payer policies to answer questions such as:
+PriorAuthIQ was inspired by my experience leading financial clearance and prior authorization operations in pediatric healthcare. Throughout my career, I saw how staff often spent significant time searching through lengthy payer policies to determine authorization requirements, coverage criteria, reimbursement rules, and required documentation.
 
-- Is prior authorization required?
-- What documentation is required?
-- What services are covered?
-- What reimbursement rules apply?
+I built PriorAuthIQ to explore how Retrieval-Augmented Generation (RAG) and modern large language models can improve this workflow by providing grounded, citation-backed answers from official payer policy documents rather than relying on manual searches or unsupported AI responses.
 
-PriorAuthIQ demonstrates how modern AI engineering techniques—including semantic search, vector databases, and AI-powered retrieval—can streamline this workflow while keeping responses grounded in the original policy documents.
+This project combines my healthcare operations background with AI engineering principles, including semantic search, vector databases, REST API development, structured AI outputs, and containerized deployment. My goal was to build a practical application that demonstrates how AI can improve real-world operational workflows while remaining transparent and trustworthy through source citations.
 
 ---
 
@@ -146,7 +145,24 @@ PriorAuthIQ/
 | Data Validation | Pydantic |
 | Testing | Pytest |
 | Containerization | Docker |
+---
 
+## Why This Repository Matters
+
+This project was built to demonstrate production-oriented AI engineering practices rather than simply integrating a large language model into an application.
+
+It showcases several core competencies expected of modern AI engineers:
+
+- Retrieval-Augmented Generation (RAG)
+- Semantic search with vector embeddings
+- Vector database design using ChromaDB
+- FastAPI REST API development
+- Modular Python application architecture
+- Structured LLM outputs using Pydantic
+- Docker containerization
+- Citation-backed AI responses for improved transparency
+
+By combining real-world healthcare domain knowledge with modern AI engineering techniques, PriorAuthIQ demonstrates how trustworthy AI systems can be built for operational decision support.
 ---
 
 ## How It Works
@@ -465,7 +481,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for addit
 
 ## About the Author
 
-Anthony Soto is a Data & AI professional with a background in healthcare operations, revenue cycle optimization, and applied machine learning. His work focuses on building practical AI solutions that improve operational efficiency through modern data engineering, Retrieval-Augmented Generation (RAG), and intelligent automation.
+Anthony Soto is a Data Analytics and AI Engineer with a background in healthcare operations, revenue cycle optimization, and applied machine learning. His work focuses on building practical AI solutions that improve operational efficiency through modern data engineering, Retrieval-Augmented Generation (RAG), and intelligent automation.
 
 PriorAuthIQ was developed as an original portfolio project to demonstrate the design and implementation of production-oriented AI systems using FastAPI, vector databases, semantic search, and large language models.
 
