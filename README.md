@@ -481,11 +481,11 @@ This project is licensed under the MIT License. See the `LICENSE` file for addit
 
 ## About the Author
 
-Anthony Soto is a Data Analytics and AI Engineer with a background in healthcare operations, revenue cycle optimization, and applied machine learning. His work focuses on building practical AI solutions that improve operational efficiency through modern data engineering, Retrieval-Augmented Generation (RAG), and intelligent automation.
+Hi, I'm **Anthony Soto**, a data and AI professional with a background in healthcare operations, revenue cycle optimization, and applied machine learning. I enjoy building practical AI solutions that solve real-world business problems through modern data engineering, Retrieval-Augmented Generation (RAG), and intelligent automation.
 
-PriorAuthIQ was developed as an original portfolio project to demonstrate the design and implementation of production-oriented AI systems using FastAPI, vector databases, semantic search, and large language models.
+I developed **PriorAuthIQ** as an original portfolio project to demonstrate the design and implementation of production-oriented AI systems using FastAPI, vector databases, semantic search, and large language models. My goal is to build AI applications that are technically sound, explainable, and practical for real-world use.
 
-**Connect with me:**
+### Connect with Me
 
-- GitHub: https://github.com/AnthonySotoData
-- LinkedIn: https://www.linkedin.com/in/anthony-soto-a7b68716b/
+- **GitHub:** https://github.com/AnthonySotoData
+- **LinkedIn:** https://www.linkedin.com/in/anthony-soto-a7b68716b/
