@@ -4,7 +4,7 @@
 
 ## Enterprise AI-Powered Prior Authorization Intelligence
 
-> **🚧 Status:** MVP • Active Development
+Status: Version 1.0 • Stable
 
 **Transform payer policy documents into structured, citation-backed prior authorization intelligence using Retrieval-Augmented Generation (RAG), semantic search, vector embeddings, and Large Language Models.**
 
@@ -24,9 +24,7 @@
 
 PriorAuthIQ is an AI-powered Retrieval-Augmented Generation (RAG) application that answers payer policy and prior authorization questions using official healthcare policy documents, semantic search, vector embeddings, and citation-backed responses.
 
-Rather than relying solely on a language model's pretrained knowledge, PriorAuthIQ retrieves relevant policy content from a vector database before generating structured responses with OpenAI GPT-4.1-mini. This retrieval-first architecture improves factual accuracy, minimizes hallucinations, and allows every response to reference its original source documentation.
-
-Instead of relying solely on a language model, PriorAuthIQ implements a **Retrieval-Augmented Generation (RAG)** architecture. Relevant policy content is retrieved from a vector database before OpenAI GPT-4.1-mini generates a structured response, improving factual accuracy and grounding every answer in source documentation.
+Rather than relying solely on a language model's pretrained knowledge, PriorAuthIQ implements a **Retrieval-Augmented Generation (RAG)** architecture that retrieves relevant payer policy content from a ChromaDB vector database before generating a response with OpenAI GPT-4.1-mini. By grounding every response in retrieved policy documentation, the application improves factual accuracy, reduces hallucinations, and provides structured, citation-backed answers that users can verify against the original source material.
 
 The application automatically:
 
@@ -448,7 +446,7 @@ docker rm priorauthiq-container
 
 ## Roadmap
 
-### Version 1.0 (Current MVP)
+### Version 1.0 (Current Release)
 
 - [x] FastAPI REST API
 - [x] Retrieval-Augmented Generation (RAG)
@@ -457,19 +455,15 @@ docker rm priorauthiq-container
 - [x] Semantic search
 - [x] OpenAI GPT-4.1-mini integration
 - [x] Structured JSON responses
-- [x] Source citations
-- [x] Docker support
+- [x] Citation-backed AI responses
+- [x] Docker containerization
 
-### Planned Enhancements
+### Future Enhancements
 
-- [ ] Multi-document policy comparison
-- [ ] Support for additional LLM providers (Azure OpenAI, Anthropic)
-- [ ] Authentication and role-based access
-- [ ] Batch policy ingestion
-- [ ] Automated policy update detection
-- [ ] Advanced confidence scoring
-- [ ] Admin dashboard
-- [ ] Kubernetes deployment
+Future versions may include:
+
+- [ ] Multi-document policy comparison across multiple payers
+- [ ] Enhanced confidence scoring based on retrieval quality and supporting evidence
 
 ---
 
